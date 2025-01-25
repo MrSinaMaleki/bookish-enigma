@@ -15,3 +15,27 @@ class ElasticClient:
             self.client.indices.create(index_name, schema)
             print(f"Index ({index_name}) created")
 
+
+    def create_post_index(self):
+        """
+        creating post indexes
+        """
+
+        index_name = "posts"
+        if self.client.indices.exists(index=index_name):
+            print(f"Index '{index_name}' already exists. Skipping creation.")
+            return
+
+        schema = {
+            "mappings": {
+                "properties": {
+                    "Username": {"type": "text"},
+                    "Category": {"type": "keyword"},
+                    "text": {"type": "text"},
+                    "inserted_at": {"type": "date"}
+                }
+            }
+        }
+        self.client.indices.create(index=index_name, body=schema)
+
+

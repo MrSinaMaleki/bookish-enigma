@@ -39,3 +39,17 @@ class ElasticClient:
         self.client.indices.create(index=index_name, body=schema)
 
 
+    def insert_data(self, index_name, data):
+        """
+        inserts data
+        """
+
+        try:
+            response = self.client.index(index=index_name, document=data)
+            print(f"Response from index: {response}")
+
+        except Exception as e:
+            print(f"error while {e} inserting data")
+
+
+

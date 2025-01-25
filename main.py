@@ -19,9 +19,9 @@ def fetch_and_store():
     if data:
         for item in data['data']:
             document = {
-                "Username": item.get("username", "unknown"),
-                "Category": item.get("category", "uncategorized"),
-                "text": item.get("text", ""),
+                "Username": item.get("title", "unknown"),
+                "Category": item.get("genre", "uncategorized"),
+                "text": item.get("content", ""),
                 "inserted_at": item.get("inserted_at", time.strftime("%Y-%m-%dT%H:%M:%SZ")),
             }
             elastic_client.insert_data(index_name="posts", data=document)
